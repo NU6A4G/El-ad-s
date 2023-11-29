@@ -18,6 +18,10 @@ class AmobaJatek:
 
         self.gombok_keszitese()
 
+        # Hozzáadjuk a bezárás gombot
+        self.bezaras_gomb = tk.Button(self.master, text="Bezárás", command=self.master.destroy)
+        self.bezaras_gomb.grid(row=4, column=0, columnspan=2)
+
     def jatekos_bekerese(self):
         jatekosok = []
         for i in range(2):
@@ -42,6 +46,7 @@ class AmobaJatek:
             self.frissites_gombok()
 
             if self.ellenorzes(jel):
+                self.mentes_gyoztes(nev=self.jatekosok[self.aktualis_jatekos])
                 messagebox.showinfo("Győzelem!", f"{self.jatekosok[self.aktualis_jatekos]} győzött!")
                 self.uj_jatek()
             elif self.ures_mezok() == 0:
@@ -81,6 +86,10 @@ class AmobaJatek:
         self.aktualis_jatekos = 0
         self.frissites_gombok()
         self.statusz_label.config(text=f"{self.jatekosok[self.aktualis_jatekos]} következik")
+
+    def mentes_gyoztes(self, nev):
+        with open("gyoztesek.txt", "a") as fajl:
+            fajl.write(f"{nev}\n")
 
 
 if __name__ == "__main__":
