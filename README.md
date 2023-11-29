@@ -1,0 +1,2 @@
+# El-ad-s
+Amőba
